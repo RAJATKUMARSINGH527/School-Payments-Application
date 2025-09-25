@@ -61,8 +61,8 @@ SchoolPay is a modern, responsive React frontend application for managing school
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/schoolpay-frontend.git
-cd schoolpay-frontend
+git clone https://github.com/RAJATKUMARSINGH527/School-Payments-Application.git
+cd School-Payments-Application
 ```
 
 3. **Install dependencies**
@@ -136,6 +136,6 @@ This project is licensed under the MIT License.
 
 ## Contact
 
-Developer - Rajat Kumar Singh
-Email - rajatkumarsingh257@example.com
-GitHub - https://github.com/RAJATKUMARSINGH527
+**Developer:** Rajat Kumar Singh  
+- Email: [rajatkumarsingh257@example.com](mailto:rajatkumarsingh257@example.com)  
+- GitHub: [RAJATKUMARSINGH527](https://github.com/RAJATKUMARSINGH527)  
