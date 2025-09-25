@@ -10,26 +10,53 @@ const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 
-Frontend_URL = process.env.Frontend_URL
-Frontend_Deployed_URL = process.env.Frontend_Deployed_URL
+// Log all incoming requests for debugging
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} from Origin: ${req.headers.origin}`);
+  next();
+});
 
-
+// CORS configuration
 app.use(cors({
-  origin: process.env.NODE_ENV === 'development' ? Frontend_URL : Frontend_Deployed_URL,
-  credentials: true,
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      "http://localhost:5173", // Local development
+      "https://school-payments-application.vercel.app", // Production frontend
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // Enable if you use cookies or auth tokens
 }));
 
+// Handle preflight OPTIONS requests
+app.options('*', cors());
 
-
+// Middleware for parsing JSON and URL-encoded bodies
 app.use(express.json());
+
+ //to pass the form data from the frontend to the backend server 
+app.use(express.urlencoded({ extended: false }));
+
 
 app.use('/auth', authRoutes);
 app.use('/orders', orderRoutes);
 app.use('/transactions', transactionRoutes);
 app.use('/webhook', webhookRoutes);
 
-/// Error handling middleware (should be last)
 app.use(errorHandler);
+
+
+
+// Test endpoint to verify server is alive
+app.get('/test', (req, res) => {
+  res.json({ message: 'Server is alive' });
+});
 
 const PORT = process.env.PORT || 5000;
 
@@ -40,6 +67,6 @@ app.listen(PORT, async () => {
     console.log(`🚀 Server is running and connected to MongoDB at http://localhost:${PORT}`);
   } catch (error) {
     console.error('❌ Failed to connect to MongoDB:', error);
-    process.exit(1); // Exit process if DB connection fails
+    process.exit(1);
   }
 });
