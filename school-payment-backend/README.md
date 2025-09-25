@@ -93,7 +93,7 @@ NODE_ENV=development
 4. **Run the server**
 
 ```bash
-npm start
+npm run server
 ```
 Your server will start at:
 `👉 http://localhost:3000`
@@ -246,3 +246,9 @@ Contributions, issues, and feature requests are welcome!
 
 This project is licensed under the MIT License.
 
+
+## Contact
+
+Developer - Rajat Kumar Singh
+Email - rajatkumarsingh257@example.com
+GitHub - https://github.com/RAJATKUMARSINGH527
