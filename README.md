@@ -7,6 +7,12 @@ It consists of:
 
 ---
 
+
+🔗 **Live Demo:**  *([Click here to view the deployed application ](https://school-payments-application.vercel.app/home))*  
+
+
+---
+
 ## 📑 Table of Contents  
 
 - [Project Overview](#project-overview)  
@@ -318,6 +324,19 @@ src/
 2. Create a feature branch.  
 3. Commit changes.  
 4. Push to branch & open a Pull Request.  
+
+---
+
+## 🌐 Deployment Links
+
+Frontend (Vercel): **Live App** *([Frontend Deployed Link Here](https://school-payments-application.vercel.app/home))*  
+Backend (Render): **Live API** *([Backend Deployed Link Here](https://school-payments-application.onrender.com))*  
+
+---
+
+### 📹 Video Presentation
+
+🎥 Watch the project demo here: Google Drive Link *(https://drive.google.com/file/d/1ue4hNLqIvEPt7uAauj-PvkjzCztSPmOX/view?usp=sharing)* 
 
 ---
 
