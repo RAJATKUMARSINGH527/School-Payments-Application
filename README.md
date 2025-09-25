@@ -82,14 +82,13 @@ SchoolPay is a **secure and scalable MERN-based school payment system** that pro
 
 ```mermaid
 graph LR
-    A -->|Interacts| B
-    B --> C
-    C --> D
-    C --> E
-    E --> C
-    C --> B
-    B --> A
-
+    A -->|Interacts with| B
+    B -->|Sends API Requests| C
+    C -->|Fetches/Stores Data| D
+    C -->|Sends Payment Requests| E
+    E -->|Sends Webhook Notifications| C
+    C -->|Sends Responses| B
+    B -->|Displays Data| A
 ```
 
 
