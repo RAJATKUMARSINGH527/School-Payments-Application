@@ -27,7 +27,9 @@ It consists of:
 - [Folder Structure](#folder-structure)  
 - [Authentication Flow](#authentication-flow)  
 - [Testing](#testing)  
-- [Contributing](#contributing)  
+- [Contributing](#contributing)
+- [Deployment Links](#deployment-links)
+- [Video Presentation](#video-presentation)
 - [License](#license)  
 - [Contact](#contact)  
 
