@@ -82,10 +82,10 @@ SchoolPay is a **secure and scalable MERN-based school payment system** that pro
 
 ```mermaid
 graph LR
-    A -->|Interacts with| B
-    B -->|Sends API Requests| C
-    C -->|Fetches/Stores Data| D
-    C -->|Sends Payment Requests| E
+    A[User] -->|Interacts with| B[Frontend (React App)]
+    B -->|Sends API Requests| C[Backend API Service (Express.js + MongoDB)]
+    C -->|Fetches/Stores Data| D[MongoDB Atlas]
+    C -->|Sends Payment Requests| E[Payment Gateway (Edviron)]
     E -->|Sends Webhook Notifications| C
     C -->|Sends Responses| B
     B -->|Displays Data| A
