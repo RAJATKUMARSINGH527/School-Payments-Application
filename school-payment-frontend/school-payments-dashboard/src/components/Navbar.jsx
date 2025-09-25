@@ -2,7 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
 
-const BASE_URL = process.env.NODE_ENV === "development" ? bcUrlLocal : bcUrl;
+
+const BASE_URL = "https://school-payments-application.onrender.com"
 
 const Navbar = () => {
   const [user, setUser] = useState(null);

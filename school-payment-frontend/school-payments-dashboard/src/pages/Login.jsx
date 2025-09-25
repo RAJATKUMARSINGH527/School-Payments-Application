@@ -2,8 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
-
-const BASE_URL = process.env.NODE_ENV === "development" ? bcUrlLocal : bcUrl;
+const BASE_URL = "https://school-payments-application.onrender.com"
 
 const Login = () => {
   const [email, setEmail] = useState("");

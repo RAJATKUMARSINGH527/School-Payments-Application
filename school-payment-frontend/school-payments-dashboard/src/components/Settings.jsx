@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 
-const BASE_URL = process.env.NODE_ENV === "development" ? bcUrlLocal : bcUrl;
+const BASE_URL = "https://school-payments-application.onrender.com"
 
 
 const Settings = () => {
