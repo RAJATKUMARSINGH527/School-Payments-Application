@@ -162,13 +162,13 @@ git clone https://github.com/RAJATKUMARSINGH527/School-Payments-Application.git
 cd School-Payments-Application
 ```
 
-3. **Install dependencies**
+2. **Install dependencies**
 
 ```bash
 npm install
 ```
 
-4. **Run the server**
+3. **Run the server**
 
 ```bash
 npm run dev
