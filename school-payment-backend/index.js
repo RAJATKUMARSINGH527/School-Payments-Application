@@ -35,7 +35,8 @@ app.use(cors({
 }));
 
 // Handle preflight OPTIONS requests
-app.options('*', cors());
+app.options('/*', cors());
+
 
 // Middleware for parsing JSON and URL-encoded bodies
 app.use(express.json());
