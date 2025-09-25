@@ -34,15 +34,11 @@ app.use(cors({
   credentials: true, // Enable if you use cookies or auth tokens
 }));
 
-// Handle preflight OPTIONS requests
-app.options('/*', cors());
-
 
 // Middleware for parsing JSON and URL-encoded bodies
 app.use(express.json());
 
- //to pass the form data from the frontend to the backend server 
-app.use(express.urlencoded({ extended: false }));
+
 
 
 app.use('/auth', authRoutes);
