@@ -16,22 +16,23 @@ app.use((req, res, next) => {
   next();
 });
 
-// CORS configuration
 app.use(cors({
   origin: (origin, callback) => {
     const allowedOrigins = [
-      "http://localhost:5173", // Local development
-      "https://school-payments-application.vercel.app", // Production frontend
+      "http://localhost:5173",
+      "https://school-payments-application.vercel.app"
     ];
+    console.log("CORS Origin Check:", origin);
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.log("Blocked by CORS:", origin);
       callback(new Error("Not allowed by CORS"));
     }
   },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true, // Enable if you use cookies or auth tokens
+  credentials: true,
 }));
 
 
