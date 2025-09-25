@@ -4,9 +4,6 @@ import TableWithHover from "../components/TableWithHover";
 
 
 
-const BASE_URL = "https://school-payments-application.onrender.com"
-
-
 const columns = [
   "srno",
   "school_id",
@@ -45,7 +42,7 @@ const TransactionsOverviewPage = () => {
         const token = localStorage.getItem("jwt_token");
         if (!token) return;
         const res = await axios.get(
-          `${BASE_URL}/transactions?limit=${limit}&page=${page}&sort=payment_time&order=desc`,
+          `https://school-payments-application.onrender.com/transactions?limit=${limit}&page=${page}&sort=payment_time&order=desc`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const dataWithSrNo = (res.data.data || []).map((item, index) => ({

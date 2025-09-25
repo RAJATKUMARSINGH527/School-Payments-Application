@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 
-const BASE_URL = "https://school-payments-application.onrender.com"
-
-
 const Settings = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -22,7 +19,7 @@ const Settings = () => {
         return;
       }
       try {
-        const res = await axios.get(`${BASE_URL}/auth/view`, {
+        const res = await axios.get("https://school-payments-application.onrender.com/auth/view", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFormData({
@@ -50,7 +47,7 @@ const Settings = () => {
       return;
     }
     try {
-      await axios.put(`${BASE_URL}/auth/edit`, formData, {
+      await axios.put("https://school-payments-application.onrender.com/auth/edit", formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessage("Profile updated successfully!");

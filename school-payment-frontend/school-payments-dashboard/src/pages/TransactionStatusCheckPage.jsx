@@ -3,9 +3,6 @@ import axios from "axios";
 
 
 
-const BASE_URL = "https://school-payments-application.onrender.com"
-
-
 function getStatusColor(status) {
   if (!status) return "bg-gray-300 text-gray-700";
   if (status.toLowerCase() === "success") return "bg-green-100 text-green-700 border-green-400";
@@ -35,7 +32,7 @@ const TransactionStatusCheckPage = () => {
 
     try {
       const res = await axios.get(
-        `${BASE_URL}/transactions/status/${customOrderId}`,
+        `https://school-payments-application.onrender.com/transactions/status/${customOrderId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

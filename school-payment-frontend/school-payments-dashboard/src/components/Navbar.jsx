@@ -2,9 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
 
-
-const BASE_URL = "https://school-payments-application.onrender.com"
-
 const Navbar = () => {
   const [user, setUser] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -26,7 +23,7 @@ const Navbar = () => {
     }
 
     try {
-      const res = await fetch(`${BASE_URL}/auth/view`, {
+      const res = await fetch("https://school-payments-application.onrender.com/auth/view", {
         headers: { Authorization: `Bearer ${token}` },
       });
 

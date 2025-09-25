@@ -3,9 +3,6 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
 
-const BASE_URL = "https://school-payments-application.onrender.com"
-
-
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -31,7 +28,7 @@ const Signup = () => {
 
     try {
       console.log("Registering user:", { username, email });
-      await axios.post(`${BASE_URL}/auth/register`, {
+      await axios.post("https://school-payments-application.onrender.com/auth/register", {
         username,
         email,
         password

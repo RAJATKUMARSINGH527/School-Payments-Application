@@ -2,8 +2,6 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
-const BASE_URL = "https://school-payments-application.onrender.com"
-
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +21,7 @@ const Login = () => {
 
     try {
       console.log("Attempting login with email:", email);
-      const response = await axios.post(`${BASE_URL}/auth/login`, {
+      const response = await axios.post("https://school-payments-application.onrender.com/auth/login", {
         email,
         password
       });

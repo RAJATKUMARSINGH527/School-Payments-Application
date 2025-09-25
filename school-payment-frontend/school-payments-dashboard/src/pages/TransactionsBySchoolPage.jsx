@@ -3,7 +3,6 @@ import axios from "axios";
 import TableWithHover from "../components/TableWithHover";
 
 
-const BASE_URL = "https://school-payments-application.onrender.com"
 
 const columns = [
   "srno",
@@ -33,7 +32,7 @@ const TransactionsBySchoolPage = () => {
     const token = localStorage.getItem("jwt_token");
     try {
       const res = await axios.get(
-        `${BASE_URL}/transactions/school/${schoolId}`, 
+        `https://school-payments-application.onrender.com/transactions/school/${schoolId}`, 
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const dataWithSrNo = (res.data.data || []).map((item, index) => ({

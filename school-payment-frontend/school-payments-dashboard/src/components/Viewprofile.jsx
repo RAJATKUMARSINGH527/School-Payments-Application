@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 
-
-const BASE_URL = "https://school-payments-application.onrender.com"
-
 const ViewProfile = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,7 +14,7 @@ const ViewProfile = () => {
         return;
       }
       try {
-        const res = await axios.get(`${BASE_URL}/auth/view`, {
+        const res = await axios.get("https://school-payments-application.onrender.com/auth/view", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProfile(res.data);

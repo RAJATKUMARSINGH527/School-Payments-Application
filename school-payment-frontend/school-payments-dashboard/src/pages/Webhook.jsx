@@ -2,9 +2,6 @@ import { useState } from "react";
 import axios from "axios";
 
 
-const BASE_URL = "https://school-payments-application.onrender.com"
-
-
 const statusStyles = {
   success: "bg-green-100 text-green-700",
   failed: "bg-red-100 text-red-700",
@@ -29,7 +26,7 @@ const WebhookUpdatePage = () => {
     try {
       const token = localStorage.getItem("jwt_token");
       const response = await axios.get(
-        `${BASE_URL}/orders/status/${orderId}`,
+        `https://school-payments-application.onrender.com/orders/status/${orderId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
