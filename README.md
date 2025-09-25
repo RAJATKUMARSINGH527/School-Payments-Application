@@ -81,14 +81,7 @@ SchoolPay is a **secure and scalable MERN-based school payment system** that pro
 ## 🏗️ System Architecture  
 
 ```` ```````
-graph LR
-A[User] -->|Interacts with| B[Frontend (React App)]
-B -->|Sends API Requests| C[Backend API Service (Express.js + MongoDB)]
-C -->|Fetches/Stores Data| D[MongoDB Atlas]
-C -->|Sends Payment Requests| E[Payment Gateway (Edviron)]
-E -->|Sends Webhook Notifications| C
-C -->|Sends Responses| B
-B -->|Displays Data| A
+graph LR A[User] -->|Interacts with| B[Frontend (React App)] B -->|Sends API Requests| C[Backend API Service (Express.js + MongoDB)] C -->|Fetches/Stores Data| D[MongoDB Atlas] C -->|Sends Payment Requests| E[Payment Gateway (Edviron)] E -->|Sends Webhook Notifications| C C c -->|Sends Responses| B B -->|Displays Data| A
 `````` ```
 
 ---
