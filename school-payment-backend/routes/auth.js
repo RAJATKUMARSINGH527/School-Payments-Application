@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const UserModel = require('../models/User');
 const { body } = require('express-validator');
 const validate = require('../middlewares/validate');
+const auth = require('../middlewares/auth.middleware'); 
 require('dotenv').config();
 
 authRoutes.post(
@@ -25,18 +26,14 @@ authRoutes.post(
         return res.status(400).json({ message: 'User already exists' });
       }
 
-      bcrypt.hash(password, Number(process.env.SALT_ROUNDS), async (err, hash) => {
-        if (err) {
-          console.error('Error hashing password:', err);
-          return res.status(500).json({ error: 'Error hashing password' });
-        }
-        const user = new UserModel({ username, email, password: hash });
-        await user.save();
-        console.log(`New user registered with ID: ${user._id}`);
-        res.status(201).json({
-          message: 'You have been Successfully Registered!',
-          user: { id: user._id, username: user.username, email: user.email },
-        });
+      const hash = await bcrypt.hash(password, Number(process.env.SALT_ROUNDS));
+      const user = new UserModel({ username, email, password: hash });
+      await user.save();
+
+      console.log(`New user registered with ID: ${user._id}`);
+      res.status(201).json({
+        message: 'You have been Successfully Registered!',
+        user: { id: user._id, username: user.username, email: user.email },
       });
     } catch (err) {
       console.error('Error during registration:', err);
@@ -53,8 +50,8 @@ authRoutes.post(
   ]),
   async (req, res) => {
     console.log('Login request received:', req.body);
-
     const { email, password } = req.body;
+
     try {
       const matchingUser = await UserModel.findOne({ email });
       if (!matchingUser) {
@@ -70,7 +67,7 @@ authRoutes.post(
 
       console.log('Password matched, generating JWT token...');
       const token = jwt.sign(
-        { userId: matchingUser._id, user: matchingUser.username },
+        { userId: matchingUser._id, username: matchingUser.username },
         process.env.JWT_SECRET_KEY,
         { expiresIn: '1h' }
       );
@@ -81,10 +78,36 @@ authRoutes.post(
         token,
       });
     } catch (err) {
-      console.error('Error during login:', err);
       res.status(500).json({ message: 'Internal server error', error: err.message });
     }
   }
 );
+
+
+// Applying auth middleware here to protect profile routes
+authRoutes.get('/view', auth, async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.user.userId).select('-password');
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+authRoutes.put('/edit', auth, async (req, res) => {
+  try {
+    const { username,email, phone} = req.body;
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      req.user.userId,
+      { username,email, phone },
+      { new: true, runValidators: true }
+    ).select('-password');
+    if (!updatedUser) return res.status(404).json({ message: 'User not found' });
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 module.exports = authRoutes;
