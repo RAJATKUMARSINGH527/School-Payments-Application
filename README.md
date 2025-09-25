@@ -117,7 +117,7 @@ graph LR
    cd School-Payments-Application
 ```
 
-3. **Install dependencies**
+2. **Install dependencies**
 
 ```bash
 npm install
