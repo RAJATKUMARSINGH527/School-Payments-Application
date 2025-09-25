@@ -31,7 +31,7 @@ const Login = () => {
       localStorage.setItem("jwt_token", response.data.token);
       
       setSuccess("Login successful! Redirecting...");
-      setTimeout(() => navigate("/"), 2000);
+      setTimeout(() => navigate("/home"), 2000);
     } catch (err) {
       console.error("Login error:", err);
       setError(

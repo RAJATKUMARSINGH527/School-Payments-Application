@@ -23,7 +23,6 @@ const TransactionsOverviewPage = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [search, setSearch] = useState("");
-
   const FILTER_OPTIONS = ["All", "Order ID", "Student ID", "Phone No"];
   const DATE_OPTIONS = ["All Dates", "Last 7 Days", "Last 30 Days", "This Month", "Last Month"];
   const STATUS_OPTIONS = ["All Statuses", "Success", "Failed", "Pending"];
@@ -32,24 +31,27 @@ const TransactionsOverviewPage = () => {
   const [dateFilter, setDateFilter] = useState(DATE_OPTIONS[0]);
   const [statusFilter, setStatusFilter] = useState(STATUS_OPTIONS[0]);
   const [advancedFilter, setAdvancedFilter] = useState(ADVANCED_FILTERS[0]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const token = localStorage.getItem("jwt_token");
+        if (!token) return;
         const res = await axios.get(
           `http://localhost:3000/transactions?limit=${limit}&page=${page}&sort=payment_time&order=desc`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
-
         const dataWithSrNo = (res.data.data || []).map((item, index) => ({
           ...item,
           srno: (page - 1) * limit + index + 1,
         }));
-
         setTransactions(dataWithSrNo);
       } catch (error) {
         console.error("Error fetching transactions:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -132,25 +134,20 @@ const TransactionsOverviewPage = () => {
   // Export filtered data as CSV
   const exportToCSV = () => {
     const csvHeader = columns.join(",") + "\n";
-
     const csvRows = filteredTransactions.map(tx =>
       columns.map(col => {
         const val = tx[col] !== undefined && tx[col] !== null ? tx[col].toString() : "";
         return `"${val.replace(/"/g, '""')}"`;
       }).join(",")
     );
-
     const csvContent = csvHeader + csvRows.join("\n");
-
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
-
     const link = document.createElement("a");
     link.href = url;
     link.setAttribute("download", `transactions_filtered_page_${page}.csv`);
     document.body.appendChild(link);
     link.click();
-
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   };
@@ -159,7 +156,6 @@ const TransactionsOverviewPage = () => {
     <div>
       {/* Header controls */}
       <div className="bg-white dark:bg-gray-900 rounded-t-lg flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 mb-0 shadow-sm">
-        {/* Left controls */}
         <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
           <input
             type="text"
@@ -188,8 +184,6 @@ const TransactionsOverviewPage = () => {
             className="w-16 px-2 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           />
         </div>
-
-        {/* Right controls */}
         <div className="flex flex-wrap gap-2 items-center justify-end sm:justify-start">
           <select
             value={dateFilter}
@@ -232,13 +226,14 @@ const TransactionsOverviewPage = () => {
           </button>
         </div>
       </div>
-
       <h1 className="text-2xl font-bold mb-6 pt-4 pb-2 px-4">Transactions Overview</h1>
-
       <div className="overflow-x-auto rounded-b-lg px-4">
-        <TableWithHover columns={columns} data={filteredTransactions} />
+        {loading ? (
+          <div className="py-10 text-center text-blue-600 text-lg">Loading transactions...</div>
+        ) : (
+          <TableWithHover columns={columns} data={filteredTransactions} />
+        )}
       </div>
-
       <div className="mt-6 mb-2 flex flex-col sm:flex-row justify-between px-4 pb-4">
         <button
           onClick={() => setPage((p) => Math.max(p - 1, 1))}

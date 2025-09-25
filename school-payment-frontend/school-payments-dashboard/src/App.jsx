@@ -7,22 +7,16 @@ import Signup from "./pages/Signup";
 import Orders from "./pages/Orders";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Home from "./components/Home";
 import Webhook from "./pages/Webhook";
+import Settings from "./components/Settings";
+import ViewProfile from "./components/Viewprofile";
 
 const RequireAuth = ({ children }) => {
   const token = localStorage.getItem("jwt_token");
   if (!token) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-gray-800 dark:text-gray-200">
-        <p className="text-xl mb-4">Please login to view this page.</p>
-        <a
-          href="/login"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-        >
-          Go to Login
-        </a>
-      </div>
-    );
+    window.location.href = "/login";
+    return null;
   }
   return children;
 };
@@ -32,9 +26,9 @@ function App() {
     <BrowserRouter>
       <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 text-gray-900 dark:text-gray-100">
         <Navbar />
-
         <main className="flex-grow p-4 sm:p-8">
           <Routes>
+            <Route path="/home" element={<Home />} />
             <Route
               path="/"
               element={
@@ -59,7 +53,7 @@ function App() {
                 </RequireAuth>
               }
             />
-             <Route
+            <Route
               path="/orders"
               element={
                 <RequireAuth>
@@ -67,7 +61,7 @@ function App() {
                 </RequireAuth>
               }
             />
-             <Route
+            <Route
               path="/webhook"
               element={
                 <RequireAuth>
@@ -75,13 +69,27 @@ function App() {
                 </RequireAuth>
               }
             />
-
+             <Route
+              path="/auth/view"
+              element={
+                <RequireAuth>
+                  <ViewProfile/>
+                </RequireAuth>
+              }
+            />
+             <Route
+              path="/auth/edit"
+              element={
+                <RequireAuth>
+                  <Settings/>
+                </RequireAuth>
+              }
+            />
             {/* Public routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
           </Routes>
         </main>
-
         <Footer />
       </div>
     </BrowserRouter>

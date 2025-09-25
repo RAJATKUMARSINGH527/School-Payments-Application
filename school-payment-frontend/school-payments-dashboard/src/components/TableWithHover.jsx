@@ -29,7 +29,7 @@ const TableWithHover = ({ columns, data }) => (
               colSpan={columns.length}
               className="text-center py-6 text-gray-500 dark:text-gray-400 font-semibold"
             >
-              No transactions found for this school.
+              No transactions found.
             </td>
           </tr>
         ) : (
@@ -51,7 +51,7 @@ const TableWithHover = ({ columns, data }) => (
                   .replace(/\s+/g, "_")
                   .replace(/[^a-z0-9_]/g, "");
                 const val = row[key];
-                // Adding rounded corners for first and last td
+                // Rounded corners for table edges
                 const roundedClass =
                   colIdx === 0
                     ? "rounded-l-lg"
