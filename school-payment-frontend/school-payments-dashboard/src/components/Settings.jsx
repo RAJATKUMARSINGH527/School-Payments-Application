@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+
+const BASE_URL = process.env.NODE_ENV === "development" ? bcUrlLocal : bcUrl;
+
+
 const Settings = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -18,7 +22,7 @@ const Settings = () => {
         return;
       }
       try {
-        const res = await axios.get("http://localhost:3000/auth/view", {
+        const res = await axios.get(`${BASE_URL}/auth/view`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setFormData({
@@ -46,7 +50,7 @@ const Settings = () => {
       return;
     }
     try {
-      await axios.put("http://localhost:3000/auth/edit", formData, {
+      await axios.put(`${BASE_URL}/auth/edit`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessage("Profile updated successfully!");

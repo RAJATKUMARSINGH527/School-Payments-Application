@@ -2,6 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
+const BASE_URL = process.env.NODE_ENV === "development" ? bcUrlLocal : bcUrl;
+
+
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -27,7 +30,7 @@ const Signup = () => {
 
     try {
       console.log("Registering user:", { username, email });
-      await axios.post("http://localhost:3000/auth/register", {
+      await axios.post(`${BASE_URL}/auth/register`, {
         username,
         email,
         password

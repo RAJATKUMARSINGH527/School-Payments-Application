@@ -1,6 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 
+
+const BASE_URL = process.env.NODE_ENV === "development" ? bcUrlLocal : bcUrl;
+
+
 function getStatusColor(status) {
   if (!status) return "bg-gray-300 text-gray-700";
   if (status.toLowerCase() === "success") return "bg-green-100 text-green-700 border-green-400";
@@ -30,7 +34,7 @@ const TransactionStatusCheckPage = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:3000/transactions/status/${customOrderId}`,
+        `${BASE_URL}/transactions/status/${customOrderId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

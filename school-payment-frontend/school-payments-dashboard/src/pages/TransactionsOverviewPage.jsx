@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import TableWithHover from "../components/TableWithHover";
 
+
+const BASE_URL = process.env.NODE_ENV === "development" ? bcUrlLocal : bcUrl;
+
+
 const columns = [
   "srno",
   "school_id",
@@ -40,7 +44,7 @@ const TransactionsOverviewPage = () => {
         const token = localStorage.getItem("jwt_token");
         if (!token) return;
         const res = await axios.get(
-          `http://localhost:3000/transactions?limit=${limit}&page=${page}&sort=payment_time&order=desc`,
+          `${BASE_URL}/transactions?limit=${limit}&page=${page}&sort=payment_time&order=desc`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const dataWithSrNo = (res.data.data || []).map((item, index) => ({

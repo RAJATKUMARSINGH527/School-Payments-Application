@@ -1,6 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
+
+const BASE_URL = process.env.NODE_ENV === "development" ? bcUrlLocal : bcUrl;
+
 const Navbar = () => {
   const [user, setUser] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -22,7 +25,7 @@ const Navbar = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/auth/view", {
+      const res = await fetch(`${BASE_URL}/auth/view`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

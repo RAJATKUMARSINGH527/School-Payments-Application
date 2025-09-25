@@ -1,6 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 
+const BASE_URL = process.env.NODE_ENV === "development" ? bcUrlLocal : bcUrl;
+
+
 const statusStyles = {
   success: "bg-green-100 text-green-700",
   failed: "bg-red-100 text-red-700",
@@ -25,7 +28,7 @@ const WebhookUpdatePage = () => {
     try {
       const token = localStorage.getItem("jwt_token");
       const response = await axios.get(
-        `http://localhost:3000/orders/status/${orderId}`,
+        `${BASE_URL}/orders/status/${orderId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

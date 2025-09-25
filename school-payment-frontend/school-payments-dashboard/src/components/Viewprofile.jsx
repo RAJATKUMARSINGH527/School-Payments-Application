@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+
+const BASE_URL = process.env.NODE_ENV === "development" ? bcUrlLocal : bcUrl;
+
 const ViewProfile = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,7 +16,7 @@ const ViewProfile = () => {
         return;
       }
       try {
-        const res = await axios.get("http://localhost:3000/auth/view", {
+        const res = await axios.get(`${BASE_URL}/auth/view`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProfile(res.data);

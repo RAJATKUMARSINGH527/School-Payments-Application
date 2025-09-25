@@ -1,6 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 
+
+const BASE_URL = process.env.NODE_ENV === "development" ? bcUrlLocal : bcUrl;
+
 const CreatePaymentPage = () => {
   const [form, setForm] = useState({
     school_id: "",
@@ -10,7 +13,7 @@ const CreatePaymentPage = () => {
     amount: "", 
     transaction_amount: "", 
     custom_order_id: "",
-    callback_url: "http://localhost:3000/payment-status",
+    callback_url: `${BASE_URL}/payment-status`,
   });
 
   const [error, setError] = useState(null);
@@ -65,7 +68,7 @@ const CreatePaymentPage = () => {
     try {
       const token = localStorage.getItem("jwt_token");
       const res = await axios.post(
-        "http://localhost:3000/orders/create-payment",
+        `${BASE_URL}/orders/create-payment`,
         payload,
         {
           headers: { Authorization: `Bearer ${token}` },
