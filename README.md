@@ -348,6 +348,9 @@ This project is licensed under the **MIT License**.
 
 ## 📬 Contact  
 
-**Developer:** Rajat Kumar Singh  
-- Email: [rajatkumarsingh257@example.com](mailto:rajatkumarsingh257@example.com)  
-- GitHub: [RAJATKUMARSINGH527](https://github.com/RAJATKUMARSINGH527)  
+Made with 💜 by **[Rajat Kumar Singh]**
+
+- 📩 **Email:** [rajatkumarsingh257@gmail.com](mailto:rajatkumarsingh257@gmail.com)  
+- 🔗 **LinkedIn:** [Your LinkedIn Profile](www.linkedin.com/in/rajat-kumar-singh-574650208)  
+- 🧧 **GitHub:** [RAJATKUMARSINGH527](https://github.com/RAJATKUMARSINGH527)  
+- 
