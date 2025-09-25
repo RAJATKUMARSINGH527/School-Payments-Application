@@ -348,7 +348,7 @@ This project is licensed under the **MIT License**.
 
 ## 📬 Contact  
 
-Made with 💜 by **[Rajat Kumar Singh]**
+Made with 💜 by **Rajat Kumar Singh**
 
 - 📩 **Email:** [rajatkumarsingh257@gmail.com](mailto:rajatkumarsingh257@gmail.com)  
 - 🔗 **LinkedIn:** [Your LinkedIn Profile](www.linkedin.com/in/rajat-kumar-singh-574650208)  
